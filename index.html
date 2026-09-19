@@ -730,10 +730,17 @@ function safeFilePart(value){
     .slice(0,60) || "booking";
 }
 
-function pdfFileName(){
-  const activity=bookingType==="trek"?val("trek"):val("tour");
-  const name=val("name");
-  return `Yaariya-${bookingType==="trek"?"Trek":"Tour"}-${safeFilePart(activity)}-${safeFilePart(name)}.pdf`;
+function pdfFileName() {
+  const activity =
+    bookingType === "trek"
+      ? document.getElementById("trek").value
+      : document.getElementById("tour").value;
+
+  if (!activity || !activity.trim()) {
+    return "Yaariya-Booking.pdf";
+  }
+
+  return `${safeFilePart(activity)}-Booking.pdf`;
 }
 
 function pdfOptions(){
